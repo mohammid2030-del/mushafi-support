@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مصحفي | دعوة صحبة الفجر</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+.wake{text-align:center}
+.wake h2{margin:.4em 0 .2em}
+.code{display:inline-block;direction:ltr;font:700 26px/1.4 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:10px 18px;border-radius:14px;border:1px dashed currentColor;margin:10px 0}
+.open{display:inline-block;margin-top:12px;padding:12px 22px;border-radius:14px;background:#153f32;color:#fff;text-decoration:none;font-weight:700}
+.steps{text-align:right;line-height:1.9}
+button.copy{font:inherit;padding:6px 14px;border-radius:10px;border:1px solid #ccc;background:transparent;cursor:pointer}
+</style>
+</head>
+<body>
+<main>
+<header><img src="icon.png" alt=""><div><h1>مصحفي</h1><p>قرآن، ذكر، طمأنينة</p></div></header>
+
+<div class="card wake">
+<h2>دعوة «صحبة الفجر»</h2>
+<p>وصلتك دعوة ليصحّيك صاحبها لصلاة الفجر برنّة من داخل تطبيق مصحفي.</p>
+<div id="code-box" hidden>
+<p>رمز الدعوة</p>
+<div class="code" id="code"></div><br>
+<button class="copy" id="copy">نسخ الرمز</button><br>
+<a class="open" id="open" href="#">افتح في مصحفي</a>
+</div>
+<p id="bad" hidden>الرابط غير مكتمل. اطلب من صاحب الدعوة إرسالها مرة أخرى.</p>
+</div>
+
+<div class="card steps">
+<h2>إذا ما انفتح التطبيق</h2>
+<p>١. ثبّت تطبيق «مصحفي» من App Store أو Google Play.<br>
+٢. سجّل دخولك من داخل التطبيق.<br>
+٣. افتح «صحبة الفجر» ← «الأشخاص» ← «عندي رمز دعوة»، وأدخل الرمز.</p>
+<p><small>بعد القبول يقدر صاحب الدعوة يرنّ على جوالك وقت الفجر. تقدر توقف ذلك متى شئت من «الأشخاص».</small></p>
+</div>
+</main>
+<script>
+(function(){
+  var c=(new URLSearchParams(location.search).get('c')||'').trim().toLowerCase();
+  if(!/^[a-z0-9]{10}$/.test(c)){document.getElementById('bad').hidden=false;return}
+  document.getElementById('code-box').hidden=false;
+  document.getElementById('code').textContent=c;
+  var link='mushafi-app://wake/'+c;
+  document.getElementById('open').href=link;
+  document.getElementById('copy').onclick=function(){try{navigator.clipboard.writeText(c);this.textContent='نُسخ ✓'}catch(e){}};
+  setTimeout(function(){location.href=link},400);
+})();
+</script>
+</body>
+</html>
